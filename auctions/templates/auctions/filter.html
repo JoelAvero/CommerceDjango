@@ -1,0 +1,106 @@
+{% extends "auctions/layout.html" %}{% load static %}
+
+{% block body %}
+    
+<div class="sidebar">
+    
+    <a href="{% url 'index' %}"><button type="button" class="btn btn-outline-primary clearf">Clear Filters</button></a>
+
+</div>
+
+<div class="bodyauctside">
+    <h2>Active Listings</h2>
+
+    {% for auction in auctions %}
+        {% if not auction.is_active %}
+
+        <a class="alink" href="auctiondetails/{{auction.id}}">
+
+            <div class="flex">
+                
+                <div class="closed">
+                    <h1 class="closedf">Finished</h1>
+                </div>
+
+                <div class="flexadentro1">
+                    {% if auction.image == "" %}
+                        <img class="imagen" src="{% static 'auctions/notavailable.png' %}" alt="">
+                    {% else %}
+                        <img class="imagen" src="{{ auction.image }}" alt="No Image">
+                    {% endif %}
+                </div>
+            
+                <div class="flexadentro2 flexadentro">
+                    <h1 class="auctiontitle">{{ auction.title }}</h1>
+                    <h6 class="category">Category: {{ auction.get_category_display }}</h6>
+                    <p class="description">{{ auction.desc }}</p>
+                    <h6 class="listedby">listed by: <strong>{{ auction.name }}</strong></h6>
+                </div>
+            
+                <div class="flexadentro3 flexadentro">
+                    {% if auction.bidshere.all.latest.bid %}
+                        <span class="category">initial price: {{ auction.price }}</span>
+                        <br>
+                        <span class="category">last bid:</span>
+                        <h1 class="pricebid">${{ auction.bidshere.all.latest.bid }}</h1>
+                        <span class="category">Bidder: {{ auction.bidshere.all.latest.name }}</span>                
+                    {% else %}
+                        <span class="category">Price:</span>
+                        <h1 class="pricebid">${{auction.price}}</h1>
+                        <span class="category">No bids yet.</span>
+                    {% endif %}
+                </div>
+            
+            </div>
+
+        </a>
+
+        {% else %}
+
+        <a class="alink" href="auctiondetails/{{auction.id}}">
+
+            <div class="flex">
+
+                <div class="flexadentro1">
+                    {% if auction.image == "" %}
+                        <img class="imagen" src="{% static 'auctions/notavailable.png' %}" alt="">
+                    {% else %}
+                        <img class="imagen" src="{{ auction.image }}" alt="No Image">
+                    {% endif %}
+                </div>
+            
+                <div class="flexadentro2 flexadentro">
+                    <h1 class="auctiontitle">{{ auction.title }}</h1>
+                    <h6 class="category">Category: {{ auction.get_category_display }}</h6>
+                    <p class="description">{{ auction.desc }}</p>
+                    <h6 class="listedby">listed by: <strong>{{ auction.name }}</strong></h6>
+                </div>
+            
+                <div class="flexadentro3 flexadentro">
+                    {% if auction.bidshere.all.latest.bid %}
+                        <span class="category">initial price: {{ auction.price }}</span>
+                        <br>
+                        <span class="category">last bid:</span>
+                        <h1 class="pricebid">${{ auction.bidshere.all.latest.bid }}</h1>
+                        <span class="category">Bidder: {{ auction.bidshere.all.latest.name }}</span>                
+                    {% else %}
+                        <span class="category">Price:</span>
+                        <h1 class="pricebid">${{auction.price}}</h1>
+                        <span class="category">No bids yet.</span>
+                    {% endif %}
+                </div>
+            
+            </div>
+
+        </a>
+
+        {% endif %}
+    {% endfor %}
+
+</div>
+    
+{% endblock %}
+
+
+
+

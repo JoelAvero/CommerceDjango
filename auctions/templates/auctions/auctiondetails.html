@@ -1,0 +1,139 @@
+{% extends "auctions/layout.html" %}{% load static %}
+
+{% block body %}
+
+<div class="bodyauct">
+
+    <div class="aucdiv">
+
+        <div class="flex">
+
+            <div class="flexadentro1">
+                {% if auction.image == "" %}
+                    <img class="imagen" src="{% static 'auctions/notavailable.png' %}" alt="">
+                {% else %}
+                    <img class="imagen" src="{{ auction.image }}" alt="No Image">
+                {% endif %}
+            </div>
+
+            <div class="flexadentro2 flexadentro">
+                <h1 class="auctiontitle">{{ auction.title }}</h1>
+                <h6 class="category">Category: {{ auction.get_category_display }}</h6>
+                <p class="description">{{ auction.desc }}</p>
+                <h6 class="listedby">listed by: <strong>{{ auction.name }}</strong></h6>
+            </div>
+
+            <div class="flexadentro3 flexadentro">
+                {% if auction.bidshere.all.latest.bid %}
+                    <span class="category">initial price: {{ auction.price }}</span>
+                    <br>
+                    <span class="category">last bid:</span>
+                    <h1 class="pricebid">${{ auction.bidshere.all.latest.bid }}</h1>
+                    <span class="category">Bidder: {{ auction.bidshere.all.latest.name }}</span>
+                {% else %}
+                    <span class="category">Price:</span>
+                    <h1 class="pricebid">${{auction.price}}</h1>
+                    <span class="category">No bids yet.</span>
+                {% endif %}
+            </div> 
+
+        </div>
+
+
+        <!-- am i logged in? can i send this article to my favorites? favs control -->
+        {% if user.is_authenticated %}
+
+            <form action="{% url 'favs' %}" method="POST" class="favs">
+                {% csrf_token %}
+
+                <input type="hidden" name="id" value="{{auction.id}}">
+                
+                <!-- if it is in favorites, red heart, if not, gray heart -->
+                {% if isfav == True %}
+                    <input type="image" src="{% static 'auctions/heart.png' %}" class="favimg">
+                {% else %}
+                    <input type="image" src="{% static 'auctions/heart.png' %}" class="favimg" style="filter:saturate(0);">
+                {% endif %}
+
+            </form>
+            
+        {% endif %}
+
+    </div>
+
+
+    <!-- is winner? -->
+    {% if not auction.is_active and user.is_authenticated and request.user.username == auction.bidshere.all.latest.name %}
+
+        <div class="winner">
+            <h1 class="winnerh1">YOU ARE THE WINNER OF THIS AUCTION!</h1>
+        </div>
+
+    {% endif %}
+
+
+    <!-- can i bid? control -->
+    {% if user.is_authenticated and auction.is_active and user.username != auction.name %}
+
+        <form class="placebid" action="{% url 'auctiondetails' auction.id %}" method="POST">
+            {% csrf_token %}
+
+            {% if result %}    
+            <p class="result">{{result}}</p>
+            {% endif %}
+            <input type="number" name="bid" required=True>
+            <button class="btn btn-outline-primary placebtn" type="submit">Place bid</button>
+
+        </form>
+
+    {% endif %}
+
+
+    <!-- am i the creator of this auction? close auction control -->
+    {% if user.username == auction.name and auction.is_active %}
+
+        <form class="closebid" action="{% url 'closeauction' %}" method="POST">
+            {% csrf_token %}
+
+            <input type="hidden" name="id" value="{{auction.id}}">
+            <button class="btn btn-outline-primary placebtn" type="submit">Close this auction</button>
+
+        </form>
+
+    {% endif %}
+
+
+    <!-- am i logged user? can i comment? comment control -->
+    {% if user.is_authenticated %}    
+
+        <form class="commbid" action="{% url 'newcomment' %}" method="POST">
+            {% csrf_token %}
+
+            <textarea cols="75" name="comment" required=True></textarea> 
+            <input type="hidden" name="id" value="{{ auction.id }}"> <br>
+            <button class="btn btn-outline-primary placecomm" type="submit">Place comment</button>
+
+        </form>
+
+    {% endif %}
+
+
+    <!-- display comments -->
+    {% for comment in auction.commentshere.all %}
+        <div class="commdiv">
+
+            <p class="spancomment">{{ comment.name }}:</p>
+
+            <div class="comment">
+                
+                    {{ comment.comment }}
+                
+            </div>
+
+        </div>
+
+    {% endfor %}
+    <br> <!-- ?? It's a magic tool that we will need later... nah, i just can't remember why i put this here, better not touch it haha -->
+
+</div>
+{% endblock %}

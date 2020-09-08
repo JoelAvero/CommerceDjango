@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html5>
+<html lang="en">
+    <head>
+        <title>{% block title %}Auctions{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="upnav">
+            <img class="aucimg" src="{% static 'auctions/auctions.png' %}" alt="">
+            
+                
+            
+            <ul class="nav">
+                <div class="signed">
+                {% if user.is_authenticated %}
+                    Signed in as <strong> {{ user.username }}</strong>.
+                {% else %}
+                    Not signed in.
+                {% endif %}
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
+                </li>
+                {% if user.is_authenticated %}
+                
+                    <li>
+                        <a class="nav-link" href={% url 'newauction' %}>Create a new auction</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href={% url 'favorites' %}>Favorites</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link log-out" href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link log-in" href="{% url 'login' %}">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link register" href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        {% block body %}
+        {% endblock %}
+            
+    </body>
+</html>

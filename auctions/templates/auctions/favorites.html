@@ -1,0 +1,52 @@
+{% extends "auctions/layout.html" %}{% load static %}
+
+
+{% block body %}
+
+<div class="bodyauct">
+    
+    <!-- display favorites -->
+    {% for fav in favs %}
+    
+    <a class="alink" href="{% url 'auctiondetails' fav.fk_auction.id %}">
+
+        <div class="flex">
+
+            <div class="flexadentro1">
+                {% if fav.fk_auction.image == "" %}
+                    <img class="imagen" src="{% static 'auctions/notavailable.png' %}" alt="">
+                {% else %}
+                    <img class="imagen" src="{{ fav.fk_auction.image }}" alt="No Image">
+                {% endif %}
+            </div>
+        
+            <div class="flexadentro2 flexadentro">
+                <h1 class="auctiontitle">{{ fav.fk_auction.title }}</h1>
+                <h6 class="category">Category: {{ fav.fk_auction.get_category_display }}</h6>
+                <p class="description">{{ fav.fk_auction.desc }}</p>
+                <h6 class="listedby">listed by: <strong>{{ fav.fk_auction.name }}</strong></h6>
+            </div>
+        
+            <div class="flexadentro3 flexadentro">
+                {% if fav.fk_auction.bidshere.all.latest.bid %}
+                    <span class="category">initial price: {{ fav.fk_auction.price }}</span>
+                    <br>
+                    <span class="category">last bid:</span>
+                    <h1 class="pricebid">${{ fav.fk_auction.bidshere.all.latest.bid }}</h1>
+                    <span class="category">Bidder: {{ fav.fk_auction.bidshere.all.latest.name }}</span>                
+                {% else %}
+                    <span class="category">Price:</span>
+                    <h1 class="pricebid">${{fav.fk_auction.price}}</h1>
+                    <span class="category">No bids yet.</span>
+                {% endif %}
+            </div>
+        
+        </div>
+    
+    </a>
+    
+    {% endfor %}
+
+</div>
+
+{% endblock %}

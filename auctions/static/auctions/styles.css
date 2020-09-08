@@ -1,0 +1,360 @@
+/* layout style */
+
+.bodyauct {
+    position: relative;
+    width: 1000px;
+    top: 175px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bodyauctside {
+    position: relative;
+    width: 1000px;
+    left: 400px;
+    top: 175px;
+}
+
+/* superior bar and sidebar style */
+.upnav {
+    display: flex;
+    height: 135px;
+    padding-top: 20px;
+    padding-left: 15px;
+}
+
+.aucimg {
+    width: 250px;
+    height: 75.45px;
+    filter: invert(1);
+}
+
+.nav {
+    align-content: flex-end;
+    align-items: center;
+    margin-left: 3%;
+}
+
+.signed {
+    color: rgb(23, 255, 236);
+    margin-right: 20px;
+    font-size: 15px;
+}
+
+.nav-link {
+    color: white;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    color: grey;
+}
+
+.log-out, .log-in, .register {
+    color: rgb(23, 255, 236);
+}
+
+.sidebar, .upnav {
+    background-color: black;
+}
+
+.upnav {
+    position: fixed;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    z-index: 100;
+}
+
+.sidebar {
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    left: 0px;
+    top: 125px;
+    z-index: 100;
+    text-align: center;
+}
+
+/* sidebar elements style */
+h3 {
+    
+    color: rgb(23, 255, 236);
+}
+
+.tableform {
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    font-weight: 500;
+}
+
+ul {
+    list-style: none;
+}
+
+.btntd {
+    text-align: center;
+}
+
+.btn {
+    color: rgb(23, 255, 236);
+    border-color: rgb(23, 255, 236);
+}
+
+.btn:hover {
+    background-color: rgb(23, 255, 236);
+    color: black;
+    border-color: rgb(23, 255, 236);
+}
+
+.filterbtn, .clearf {
+    width: 120px;
+}
+
+.clearf {
+    margin-top: 50px;
+}
+
+/* auction display style */
+.aucdiv {
+    display: inline-flex;
+    width: 1100px;
+    height: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.flex {
+    position: relative;
+    display: inline-flex;
+    width: 1000px;
+    height: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    border: black 5px solid;
+    border-radius: 25px;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    column-gap: 0.5%;
+}
+
+.flexadentro1 {
+    position: relative;
+    z-index: 10;
+    border-radius: 19px;
+    height: 224px;
+    width: 224px;
+    border: black 3px solid;
+    text-align: center;
+}
+
+.imagen {
+    border-radius: 15px;
+    height: 100%;
+    max-width: 100%;
+}
+
+.flexadentro2 {
+    position: relative;
+    border-radius: 15px;
+    padding: 10px;
+    height: 100%;
+    width: 48%;
+    flex-grow: 1;
+    z-index: 10;
+}
+
+.flexadentro3 {
+    position: relative;
+    text-align: center;
+    height: 100%;
+    min-width: 25%;
+    padding: 4% 0;
+    border-radius: 15px;
+    background-color: rgba(23, 255, 236, 0.2);
+    z-index: 10;
+}
+
+/* auction finished style */
+.closed {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(77, 77, 77, 0.6);
+    z-index: 20;
+    border-radius: 20px;
+    text-align: center;
+    padding: 7% 0;
+    color: white;
+}
+
+.closedf {
+    font-size: 60pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    
+}
+
+.winner {
+    background-image: url(winner5.png);
+    background-repeat: repeat;
+    width: 1000px;
+    height: 150px;
+    margin: 20px auto;
+    border-radius: 25px;
+    text-align: center;
+    padding: 3.5% 0;
+}
+
+.winnerh1 {
+    font-size: 33pt;
+    background-color: rgba(255, 255, 255, 0.7);
+    font-weight: bold;
+}
+
+/* auction info style */
+.auctiontitle {
+    height: 42px;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    overflow-y: scroll;
+}
+
+.category {
+    text-align: justify;
+    font-style: italic;
+    font-weight: 550;
+}
+
+.description {
+    height: 55%;
+    padding: 10px;
+    margin-bottom: 8px;
+    background-color: rgba(23, 255, 236, 0.2);;
+    border-radius: 15px;
+    word-wrap: break-word;
+    overflow-y: scroll;
+}
+
+.listedby {
+    text-align: right;
+    font-style: italic;
+    margin-right: 15px;
+}
+
+/* bid info style */
+.pricebid {
+    font-size: 50pt;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: bold;
+}
+
+/* link hover */
+.alink {
+    width: 60%;
+    color: black;
+}
+
+.alink:hover {
+    color: black;
+    text-decoration: none;
+}
+
+/* comments style */
+.commdiv {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.comment {
+    width: 1000px;
+    min-height: 100px;
+    background-color: rgba(23, 255, 236, 0.2);
+    border-radius: 25px;
+    margin-bottom: 30px;
+    padding: 20px 15px;
+    word-wrap: break-word;
+}
+
+.spancomment {
+    font-size: large;
+    font-weight: 700;
+    margin: 10px 0px 3px 20px;
+}
+
+/* favorites */
+.favs {
+    width: 70px;
+    height: 70px;
+    margin-top: auto;
+    margin-bottom: auto;
+    
+}
+
+.favimg {
+    width: 70px;
+    height: 70px;
+}
+
+/* new auction style */
+table {
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+
+th {
+    text-align: right;
+}
+
+.newauctform {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.createbtn {
+    text-align: center;
+    width: 150px;
+    margin-top: 30px;
+}
+
+/* placebid, comments and close style */
+.placebid, .closebid {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.commbid {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.placecomm {
+    margin-top: 15px;
+}
+
+.placebtn, .placecomm {
+    background-color: rgb(23, 255, 236);
+    color: black;
+    border-color: rgb(23, 255, 236);
+}
+
+.placebtn:hover, .placecomm:hover {
+    background-color: rgb(23, 170, 255);
+    color: black;
+    border-color: rgb(23, 255, 236);
+}
+
+/* bid message style */
+.result {
+    font-weight: bold;
+    text-align: right;
+    color: red;
+}

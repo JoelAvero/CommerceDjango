@@ -1,0 +1,19 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<div class="bodyauct">
+
+    <form class="newauctform" action="{% url 'newauction' %}" method="POST">
+        {% csrf_token %}
+
+        <table class="newauctable">
+            {{form}}
+        </table>
+        <button class="btn btn-outline-primary placebtn createbtn" type="submit">Create</button>
+
+    </form>
+
+</div>
+
+{% endblock %}
